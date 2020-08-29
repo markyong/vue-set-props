@@ -1,15 +1,26 @@
 {
   "name": "vue-set-props",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "Quickly initialize the default value of component props in the component library",
+  "main": "src/index.js",
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dev-server --config webpack.dev.js",
-    "build": "NODE_ENV=production webpack --config webpack.build.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "NODE_ENV=development webpack-dev-server"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markyong/vue-set-props.git"
+  },
+  "keywords": [
+    "vue",
+    "components",
+    "props"
+  ],
+  "author": "markyong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/markyong/vue-set-props/issues"
+  },
+  "homepage": "https://github.com/markyong/vue-set-props",
   "devDependencies": {
     "css-loader": "^4.2.1",
     "element-ui": "^2.13.2",
