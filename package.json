@@ -1,0 +1,26 @@
+{
+  "name": "vue-set-props",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "NODE_ENV=development webpack-dev-server --config webpack.dev.js",
+    "build": "NODE_ENV=production webpack --config webpack.build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^4.2.1",
+    "element-ui": "^2.13.2",
+    "style-loader": "^1.2.1",
+    "vue": "^2.6.12",
+    "html-webpack-plugin": "^4.3.0",
+    "url-loader": "^4.1.0",
+    "vue-loader": "^15.9.3",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
