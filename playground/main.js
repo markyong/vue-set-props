@@ -9,10 +9,13 @@ Vue.use(ElementUI)
 
 Vue.use(VueSetProps, {
   library: ElementUI,
-  configProps: {
+  setProps: {
     Button: {
       type: 'primary',
       round: true
+    },
+    Input: {
+      clearable: true
     }
   }
 })

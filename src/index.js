@@ -38,20 +38,20 @@ VueSetProps.install = function (Vue, opts) {
     }
   }
 
-  const { configProps, library } = opts
-  if (process.env.NODE_ENV !== 'production' && !isPlainObject(configProps)) {
+  const { setProps, library } = opts
+  if (process.env.NODE_ENV !== 'production' && !isPlainObject(setProps)) {
     console.error(
-      `The configProps expected object, got ${toRawType(configProps)}.`
+      `The setProps expected object, got ${toRawType(setProps)}.`
     )
     return
   }
-  const keys = Object.keys(configProps)
+  const keys = Object.keys(setProps)
   keys.forEach(comp => {
     if (process.env.NODE_ENV !== 'production' && !library[comp]) {
       console.error(`Can not find component "${comp}" in the library.`)
       return
     }
-    const props = configProps[comp]
+    const props = setProps[comp]
     if (process.env.NODE_ENV !== 'production' && !isPlainObject(props)) {
       console.error(
         `The props expected object, got ${toRawType(props)}.`
@@ -61,7 +61,7 @@ VueSetProps.install = function (Vue, opts) {
     const propsKey = Object.keys(props)
 
     propsKey.forEach(prop => {
-      setProp(library[comp], prop, configProps[comp][prop])
+      setProp(library[comp], prop, setProps[comp][prop])
       if (process.env.NODE_ENV !== 'production' && !hasProp) {
         console.error(`Can not find prop "${prop}" in the ${comp} component.`)
       }
