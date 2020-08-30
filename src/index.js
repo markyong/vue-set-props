@@ -28,7 +28,7 @@ VueSetProps.install = function (Vue, opts) {
   if (process.env.NODE_ENV !== 'production') {
     if (!isPlainObject(opts)) {
       console.error(
-        `The second param expected object, got ${toRawType(opts)}.`
+        `The options expected Object, got ${toRawType(opts)}.`
       )
       return
     }
@@ -41,7 +41,7 @@ VueSetProps.install = function (Vue, opts) {
   const { setProps, library } = opts
   if (process.env.NODE_ENV !== 'production' && !isPlainObject(setProps)) {
     console.error(
-      `The setProps expected object, got ${toRawType(setProps)}.`
+      `The setProps expected Object, got ${toRawType(setProps)}.`
     )
     return
   }
@@ -54,7 +54,7 @@ VueSetProps.install = function (Vue, opts) {
     const props = setProps[comp]
     if (process.env.NODE_ENV !== 'production' && !isPlainObject(props)) {
       console.error(
-        `The props expected object, got ${toRawType(props)}.`
+        `${comp} component set props expected Object, got ${toRawType(props)}.`
       )
       return
     }
