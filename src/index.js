@@ -46,6 +46,17 @@ VueSetProps.install = function (Vue, opts) {
     return
   }
   const keys = Object.keys(setProps)
+  // Validate the component library has been registered because we need Vue to
+  // merge options. We know Vue.extend() has been called in Vue.component(),
+  // so we can use extendOptions._Ctor to validate here.
+  if (
+    process.env.NODE_ENV !== 'production' &&
+    library[keys[0]] &&
+    !library[keys[0]]._Ctor
+  ) {
+    console.error('The library component was not registered.')
+    return
+  }
   keys.forEach(comp => {
     if (process.env.NODE_ENV !== 'production' && !library[comp]) {
       console.error(`Can not find component "${comp}" in the library.`)
