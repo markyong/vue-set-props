@@ -54,7 +54,7 @@ VueSetProps.install = function (Vue, opts) {
     library[keys[0]] &&
     !library[keys[0]]._Ctor
   ) {
-    console.error('The library component was not registered.')
+    console.error('The component library was not registered.')
     return
   }
   keys.forEach(comp => {
