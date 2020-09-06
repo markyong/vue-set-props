@@ -55,6 +55,6 @@ Vue.use(VueSetProps, {
 ## Local development
 
 ```
-yarn i
+yarn install
 yarn dev
 ```
