@@ -39,10 +39,10 @@ Vue.use(VueSetProps, {
 
 ### Options
 
-* 类型：`Object`
+* 类型：`Object | Array<Object>`
 * 用法：
 
-  `vue-set-props` 接受一个对象，里面必须包含两个属性：
+  `vue-set-props` 接受一个对象或一个数组。数组用于设置多个组件库，每一项结构与传入对象时一致，对象里面必须包含两个属性：
   * `library`：组件库的引用。
   * `setProps`：一个对象，键是组件的引用，值是一个对象，包含需要设置的 `props` 名字和值。
 
@@ -50,7 +50,7 @@ Vue.use(VueSetProps, {
 
 * `vue-set-props` 内部没有做打包处理，保留了原始的 `process.env.NODE_ENV` 检测，你应当使用适当的打包工具配置来替换这些环境变量。
 * 必须在组件库注册后使用，因为它依赖与 `Vue.js` 内部对于选项的合并处理。
-* 请确保组件的引用正确，**不是组件名**。
+* 请确保组件库的引用正确，**不是组件库名**；要设置 `props` 的组件名必须与组件库导出来的组件引用名称一致，**不是组件自身名字**。
 
 ## Local development
 
