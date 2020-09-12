@@ -1,6 +1,5 @@
 import { isPlainObject, toRawType } from './util'
 
-const VueSetProps = {}
 let hasProp = false
 
 function findPropInMixins(mixins, prop, propValue) {
@@ -24,14 +23,8 @@ function setProp(component, prop, propValue) {
   }
 }
 
-VueSetProps.install = function (Vue, opts) {
+function setProps(opts) {
   if (process.env.NODE_ENV !== 'production') {
-    if (!isPlainObject(opts)) {
-      console.error(
-        `The options expected an Object, but got ${toRawType(opts)}.`
-      )
-      return
-    }
     if (!opts.library) {
       console.error('The library is required.')
       return
@@ -71,7 +64,6 @@ VueSetProps.install = function (Vue, opts) {
       return
     }
     const propsKey = Object.keys(props)
-
     propsKey.forEach(prop => {
       setProp(library[comp], prop, setProps[comp][prop])
       if (process.env.NODE_ENV !== 'production' && !hasProp) {
@@ -82,4 +74,16 @@ VueSetProps.install = function (Vue, opts) {
   })
 }
 
-export default VueSetProps
+function vueSetProps(Vue, opts) {
+  if (isPlainObject(opts)) {
+    setProps(opts)
+  } else if (Array.isArray(opts)) {
+    opts.forEach(opt => setProps(opt))
+  } else if(process.env.NODE_ENV !== 'production') {
+    console.error(
+      `The options expected an Object or an Array, but got ${toRawType(opts)}.`
+    )
+  }
+}
+
+export default vueSetProps
