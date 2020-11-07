@@ -7,7 +7,7 @@
 ``` bash
 npm install vue-set-props -S
 # or
-yarn add vue-set-props -S
+yarn add vue-set-props
 ```
 
 ## Usage
