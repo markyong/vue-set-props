@@ -1,6 +1,6 @@
 # vue-set-props
 
-一个用于全局初始化 `Vue.js` 组件库中组件 `props` 默认值的插件。当你在使用一个组件库时需要为每一个相同组件的特定 `prop` 设置相同的值时，你或许需要该插件。
+一个用于全局初始化 `Vue.js` 项目中全局组件的 `props` 默认值的插件。当你需要为每个相同的全局组件的特定 `prop` 设置相同的值时，你或许需要该插件。
 
 ## Installation
 
@@ -21,14 +21,11 @@ import VueSetProps from 'vue-set-props'
 Vue.use(ElementUI)
 // 必须在组件库注册后使用
 Vue.use(VueSetProps, {
-  library: ElementUI,
-  setProps: {
-    Input: {
-      clearable: true
-    },
-    Button: {
-      round: true
-    }
+  ElInput: {
+    clearable: true
+  },
+  ElButton: {
+    round: true
   }
 })
 
@@ -39,18 +36,15 @@ Vue.use(VueSetProps, {
 
 ### Options
 
-* 类型：`Object | Array<Object>`
+* 类型：`Object`
 * 用法：
 
-  `vue-set-props` 接受一个对象或一个数组。数组用于设置多个组件库，每一项结构与传入对象时一致，对象里面必须包含两个属性：
-  * `library`：组件库的引用。
-  * `setProps`：一个对象，键是组件的引用，值是一个对象，包含需要设置的 `props` 名字和值。
+  `vue-set-props` 接受一个对象。键是全局注册组件时的名字，值是一个对象，包含需要设置的 `props` 名字和值。
 
 ### Heads up
 
-* `vue-set-props` 内部没有做打包处理，保留了原始的 `process.env.NODE_ENV` 检测，你应当使用适当的打包工具配置来替换这些环境变量。
-* 必须在组件库注册后使用，因为它依赖与 `Vue.js` 内部对于选项的合并处理。
-* 请确保组件库的引用正确，**不是组件库名**；要设置 `props` 的组件名必须与组件库导出来的组件引用名称一致，**不是组件自身名字**。
+* 必须在组件库或者组件注册后使用，因为它会寻找 `Vue.js` 上注册的全局组件以及依赖于其内部对于选项的合并处理。
+* 请确保要设置的组件名字正确。
 
 ## Local development
 

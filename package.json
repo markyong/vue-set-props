@@ -1,6 +1,6 @@
 {
   "name": "vue-set-props",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Quickly initialize the default value of component props in the component library",
   "main": "dist/vue-set-props.common.js",
   "scripts": {
