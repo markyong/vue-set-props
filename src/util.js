@@ -7,3 +7,7 @@ export function isPlainObject(obj) {
 export function toRawType(value) {
   return _toString.call(value).slice(8, -1)
 }
+
+export function warn(message) {
+  console.error(`[vue-set-props] ${message}`)
+}

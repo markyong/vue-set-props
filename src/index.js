@@ -1,4 +1,4 @@
-import { isPlainObject, toRawType } from './util'
+import { isPlainObject, toRawType, warn } from './util'
 
 let hasProp = false
 
@@ -23,66 +23,32 @@ function setProp(component, prop, propValue) {
   }
 }
 
-function setProps(opts) {
-  if (process.env.NODE_ENV !== 'production') {
-    if (!opts.library) {
-      console.error('The library is required.')
-      return
-    }
-  }
-
-  const { setProps, library } = opts
-  if (process.env.NODE_ENV !== 'production' && !isPlainObject(setProps)) {
-    console.error(
-      `The setProps expected an Object, but got ${toRawType(setProps)}.`
-    )
-    return
-  }
-  const keys = Object.keys(setProps)
-  // Validate the component library has been registered because we need Vue to
-  // merge options. We know Vue.extend() has been called in Vue.component(),
-  // so we can use extendOptions._Ctor to validate here.
-  if (
-    process.env.NODE_ENV !== 'production' &&
-    library[keys[0]] &&
-    !library[keys[0]]._Ctor
-  ) {
-    console.error('The component library was not registered.')
-    return
-  }
-  keys.forEach(comp => {
-    if (process.env.NODE_ENV !== 'production' && !library[comp]) {
-      console.error(`Can not find component "${comp}" in the library.`)
-      return
-    }
-    const props = setProps[comp]
-    if (process.env.NODE_ENV !== 'production' && !isPlainObject(props)) {
-      console.error(
-        `The ${comp} component set props expected an Object, ` +
-        `but got ${toRawType(props)}.`
-      )
-      return
-    }
-    const propsKey = Object.keys(props)
-    propsKey.forEach(prop => {
-      setProp(library[comp], prop, setProps[comp][prop])
-      if (process.env.NODE_ENV !== 'production' && !hasProp) {
-        console.error(`Can not find prop "${prop}" in the ${comp} component.`)
-      }
-      hasProp = false
-    })
-  })
-}
-
 function vueSetProps(Vue, opts) {
   if (isPlainObject(opts)) {
-    setProps(opts)
-  } else if (Array.isArray(opts)) {
-    opts.forEach(opt => setProps(opt))
-  } else if(process.env.NODE_ENV !== 'production') {
-    console.error(
-      `The options expected an Object or an Array, but got ${toRawType(opts)}.`
-    )
+    const { components } = Vue.options
+    Object.keys(opts).forEach(name => {
+      const component = components[name]
+      if (component) {
+        const setProps = opts[name]
+        if (process.env.NODE_ENV !== 'production' && !isPlainObject(setProps)) {
+          warn(`The ${name} component set props options expected an Object, ` +
+          `but got ${toRawType(setProps)}.`)
+          return
+        }
+
+        Object.keys(setProps).forEach(prop => {
+          setProp(component.options, prop, setProps[prop])
+          if (process.env.NODE_ENV !== 'production' && !hasProp) {
+            warn(`Can not find prop "${prop}" in the ${name} component.`)
+          }
+          hasProp = false
+        })
+      } else if (process.env.NODE_ENV !== 'production') {
+        warn(`Can not find ${name} component in global components.`)
+      }
+    })
+  } else if (process.env.NODE_ENV !== 'production') {
+    warn(`The options expected an Object, but got ${toRawType(opts)}.`)
   }
 }
 

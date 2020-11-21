@@ -8,15 +8,12 @@ import VueSetProps from '../src/index'
 Vue.use(ElementUI)
 
 Vue.use(VueSetProps, {
-  library: ElementUI,
-  setProps: {
-    Button: {
-      type: 'primary',
-      round: true
-    },
-    Input: {
-      clearable: true
-    }
+  ElButton: {
+    type: 'primary',
+    round: true
+  },
+  ElInput: {
+    clearable: true
   }
 })
 
